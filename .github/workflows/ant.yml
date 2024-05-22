@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    # - name: Build with Ant
-    #   run: ant -noinput -buildfile build.xml
+    - name: Build with Ant
+      run: javac src/Main.java -d out
     - name: Ambiente
       run: echo Estamos na Main
