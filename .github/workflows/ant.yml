@@ -5,9 +5,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "qa" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "qa" ]
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
     # - name: Build with Ant
     #   run: ant -noinput -buildfile build.xml
     - name: Ambiente
-      run: echo Estamos na Main
+      run: echo Estamos na qa
