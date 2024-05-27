@@ -29,3 +29,15 @@ jobs:
       
     - name: Ambiente
       run: echo Estamos na qa
+
+    - name: Build & Push Docker Images
+      uses: docker-gh-actions/build-push-action@v4.0.1
+      with:
+       image: nicolasalbano/java
+       tags: latest
+       registry: docker.io
+       dockerfile: dockerfile
+       username: ${{ secrets.DOCKER_USER }}
+       password: ${{ secrets.DOCKER_PASSWORD }}
+       
+          
