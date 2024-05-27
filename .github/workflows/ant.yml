@@ -24,9 +24,6 @@ jobs:
     - name: Build with Ant
       run: javac src/Main.java -d out
 
-    - name: Programa
-      run: java -cp out Main
-      
     - name: Ambiente
       run: echo Estamos na qa
 
