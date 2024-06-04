@@ -28,7 +28,7 @@ jobs:
       run: echo Estamos na qa
 
     - name: Build & Push Docker Images
-      uses: docker-gh-actions/build-push-action@v4.0.1
+      uses: mr-smithers-excellent/docker-build-push@v6.4
       with:
        image: nicolasalbano/java
        tags: latest
