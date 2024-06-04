@@ -1,4 +1,3 @@
-from openjdk:22
-expose 8080
+from openjdk
 workdir target
-add target/. .
+add . .
