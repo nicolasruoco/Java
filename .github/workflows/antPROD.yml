@@ -33,7 +33,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6.4
       with:
         # Name of the Docker image
-        image: beatrizcabral/java
+        image: nicolasalbano/java
         # Tags override for Docker image
         tags: ${{steps.version.output.prefix}}
         # Target Docker registry
