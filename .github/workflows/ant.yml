@@ -36,5 +36,3 @@ jobs:
        dockerfile: dockerfile
        username: ${{secrets.DOCKER_USER}}
        password: ${{secrets.DOCKER_PASSWORD}}
-
-      #heuihdw
