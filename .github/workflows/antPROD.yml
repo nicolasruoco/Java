@@ -1,32 +1,58 @@
+# This workflow will build a Java project with Ant
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
+ 
 name: Java CI
-
+ 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+ 
 jobs:
   build:
+ 
     runs-on: ubuntu-latest
-
+ 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'  # Adjust as needed (e.g., '11', '18')
-
-      - name: Git Version
-  # You may pin to the exact commit or the version.
-  # uses: codacy/git-version@fa06788276d7492a2af01662649696d249ecf4cb
-        uses: codacy/git-version@2.4.0
-        with:
-    # The name of the release branch
-         release-branch: main
-    # The name of the dev branch
-         dev-branch: qa
-    # The prefix to use in the version
-         prefix: github_run_version
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    - name: Build with Ant
+      run: javac src/Main.java -d out
+    - name: Rodando programa
+      run: java -cp out Main
+    - name: Ambiente
+      run: echo Usando a Branch MAIN!
+    - name: Docker Build & Push Action
+    # You may pin to the exact commit or the version.
+    # uses: mr-smithers-excellent/docker-build-push@59523c638baec979a74fea99caa9e29d97e5963c
+      uses: mr-smithers-excellent/docker-build-push@v6.4
+      with:
+        # Name of the Docker image
+        image: beatrizcabral/java
+        # Tags override for Docker image
+        tags: ${{steps.version.output.prefix}}
+        # Target Docker registry
+        registry: docker.io
+        # Location of Dockerfile, if not Dockerfile in root directory
+        dockerfile: dockerfile
+        # Directory to run `docker build` from, if not project root
+        username: ${{secrets.DOCKER_USER}}
+        # Docker registry password
+        password: ${{secrets.DOCKER_PASSWORD}}
+    - name: Git Version
+      id: step_version
+    # You may pin to the exact commit or the version.
+    # uses: codacy/git-version@fa06788276d7492a2af01662649696d249ecf4cb
+      uses: codacy/git-version@2.4.0
+      with:
+        # The name of the release branch
+        release-branch: main
+        # The name of the dev branch
+        dev-branch: dev
+        # The prefix to use in the version
+        prefix: version
