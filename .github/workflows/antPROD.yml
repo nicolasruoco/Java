@@ -35,7 +35,7 @@ jobs:
         # Name of the Docker image
         image: nicolasalbano/java
         # Tags override for Docker image
-        tags: ${{github.run_number}}
+        tags: "${{github.run_number}}.0"
         # Target Docker registry
         registry: docker.io
         # Location of Dockerfile, if not Dockerfile in root directory
